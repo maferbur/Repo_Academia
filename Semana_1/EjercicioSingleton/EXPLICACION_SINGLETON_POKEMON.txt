@@ -1,0 +1,60 @@
+Tenemos:
+
+-UNA CLASE DE CONEXION publica "public class Pokemon" que funcionara como conexión de mi metodo que implementara
+ el evitar que se instancie mas de un objeto, ya que dentro de esta misma clase declararemos un
+ objeto estatico "private static Pokemon instance;" que solo pertenezca a esta clase, y que se estara utilizando en el metodo getInstance
+ que se implementara mas abajo, para posteriormente invocar dicho metodo getInstance el cual sera publico para poder
+ invocarlo en Main.
+
+-Nuestros ATRIBUTOS PRIVADOS, es decir que solo podran ser accesados en mi clase 
+ de conexion "Pokemon" los cuales son:
+      *private static Pokemon instance: es un objeto del tipo de mi clase"Pokemon", el cual debe ser static, es decir que pertenece a la clase
+                                        Este objeto es el que sera referenciado N veces, dependiendo del numero de Pokemones que ingrese el usuario
+ 
+      *private int pokemonCount: es un primitivo que nos ayudara a contar la cantidad de Pokemones que se estan creando. 
+-el contador solo lo utilizaremos para verificar que si es solamente un objeto el que se esta creando,
+ tambien es static pero no es privado como el resto de los atributos.
+
+-Otro ATRIBUTO STATICO (que pertenece a la clase) que sera quien cuente el número de objetos que se estan creando. 
+                       (al ser un singleton, este debe siempre ser 1)  
+
+-tenemos nuestro constructor con los atributos, el cual es privado.
+
+-Despues tendremos un metodo "getInstances" que debe regresar una instancia de mi clase conexion Pokemon
+ debe ser publico, para poder acceder a el desde mi metodo "main" que estara en mi clase "Main"
+ y MAS IMPORTANTE AUN, debe ser STATIC, ya que eso garantizara poder llamarlo desde la clase, y no tener que crear una
+ instancia u objeto cada ves que lo queramos utilizar, y es por eso que aqui es donde ocurre la magia del Singleton, 
+ este metodo contiene un if, el cual validara si mi objeto "instance" no esta referenciando a nada, si es asi, entonces dicho ojeto referenciara
+ a un objeto nuevo creado con el Constuctor de la clase, en caso contrario, si dicho objeto ya esta referenciado, entonces se regresara dicha 
+ referncia del objeto. Evidentemente la condición del if solo se ejecutara una ves, y esa unica ves sera cuando se cree el unico objeto de la clase
+ Pokemon.
+
+-Como queremos que el usuario ingrese el número de pokemones, se agregaron dos metodos mas, los cuales seran PUBLICOS
+ para poder llamarlos desde mi clase Main, estos metodos son los siguientes: 
+  * public void addPokemon(String pokemonName): este metodo sera el encargado de imprimir los nombres de los pokemones
+                                                cuando sea invocado en la clase Main, el cual veremos que estara relacionado con el 
+                                                Scanner.
+  * public int getPokemonCount(): este metodo regresa el número de Pokemones que se estan creando (diferente al número de objetos)
+  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+por otro lado, en mi CLASE MAIN:
+
+-importaremos el java.util.Scanner para poder utilizar la clase Scanner y recibir los nombres que deseen ingresar
+
+-Tenemos nuestra clase Main publica con la declaración tradicional del metodo main, el cual se comportara de la siguiente manera:
+ *se creara la variable de referencia del tipo Scanner scanner, la cual apuntara a mi nuevo objeto creado con el metodo Scanner, el cual
+  recibira como parametro el String que ingrese el usuario
+ *Se crea una variable de referencia del tipo Pokemon llamada registry, la cual apuntara a el objeto resultante de la invocacion del metodo 
+  getIntance, y ya sabemos que esta regresando un objeto del tipo Pokemon que nos indica si ese objeto ya esta referenciado o no.
+
+Y ahora si, abrimos un ciclo do-while que dira asi:
+ Haz(do): que el usuario me ingrese el nombre de un Pokemon y lo que el usuario ingrese tu los vas a referenciar con la variable pokemonName de tipo
+          String, de ante mano sabemos que PokemonName es el parametro del metodo "addPokemon", el cual guardara nuestro pokemon. Y con esta referencia
+          creada, podemos pasarla como parametro del metodo addPokemon, el cual invocaremos desde nuestra variable registry. Posteriormente preguntaremos
+          si queremos ingresar otro pokemon, por lo que crearemos una variable de referencia tipo String llamada answer que nos referencia la respuesta
+          del usuario, y entonces decimos:
+                                Si la respues es diferente de "si", rompes y me imprimes el numero de Pokemones con el metodo getPokemonCount del objeto
+                                Pokemon "registry", y me imprimes el número de objetos creados con la variable de clase de Pokemon, contador.
+ 
+
+Mientras (while) El usuario siga respondiendo que si.
